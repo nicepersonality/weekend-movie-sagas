@@ -1,6 +1,6 @@
-# Project Name
+# Weekend Movie Sagas
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+This application displays movies that exist in a DB. It also shows a detailed view for each individual movie, including genres associated with that movie. It is able to edit the movies’ information.
 
 ## Description
 
