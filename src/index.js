@@ -9,6 +9,9 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put } from 'redux-saga/effects';
+
+/** ---------- SAGAS ---------- **/
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -17,6 +20,8 @@ function* rootSaga() {
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+
+/** ---------- REDUCERS & STORES ---------- **/
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -47,6 +52,8 @@ const storeInstance = createStore(
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
+
+/** ---------- PASS STORE+SAGAS INTO APP ---------- **/
 
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
