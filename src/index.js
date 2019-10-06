@@ -17,20 +17,44 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIE', fetchMovieSaga);
+    yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
+    yield takeEvery('FETCH_DETAILS', fetchDetailsSaga);
+    yield takeEvery('FETCH_GENRES', fetchGenresSaga);
 }
 
 // Retrieve the list of movies from the database
-function* fetchMovieSaga(){
+function* fetchMoviesSaga() {
     try {
         const response = yield axios.get('/api/movie');
-        console.log('THIS IS FROM GET', response.data);        
+        console.log('THIS IS FROM GET', response.data);
         yield put({ type: 'SET_MOVIES', payload: response.data });
     } catch (error) {
-        console.log('Error while fetching elements', error);
-    }    
-  }
-  
+        console.log('Error while fetching movies', error);
+    }
+}
+
+function* fetchDetailsSaga(action) {
+    const movieId = action.payload;
+    try {
+        const response = yield axios.get(`/api/movie/details/${movieId}`);
+        console.log('THIS IS FROM GET', response.data);
+        yield put({ type: 'SET_DETAILS', payload: response.data });
+    } catch (error) {
+        console.log('Error while fetching details', error);
+    }
+}
+
+function* fetchGenresSaga(action) {
+    const movieId = action.payload;
+    try {
+        const response = yield axios.get(`/api/movie/genres/${movieId}`);
+        console.log('THIS IS FROM GET', response.data);
+        yield put({ type: 'SET_GENRES', payload: response.data });
+    } catch (error) {
+        console.log('Error while fetching genres', error);
+    }
+}
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -41,6 +65,16 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+// Used to store a specific movie's details
+const details = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_DETAILS':
             return action.payload;
         default:
             return state;
@@ -61,6 +95,7 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         movies,
+        details,
         genres,
     }),
     // Add sagaMiddleware to our store
@@ -72,6 +107,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();
