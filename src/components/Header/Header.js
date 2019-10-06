@@ -5,7 +5,7 @@ class Header extends Component {
     render() {
       return (
         <header className="Header-component">
-          <h2>Header</h2>
+          <h1>Reduxulous Movieplex</h1>
         </header>
       )
   };
