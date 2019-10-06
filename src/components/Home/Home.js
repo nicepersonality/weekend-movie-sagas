@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -18,9 +19,13 @@ class Home extends Component {
               <li className="moviePreview" key={movie.id}>
                 <h3 className="movieTitle">{movie.title}</h3>
                 <div className="moviePoster">
-                  <img src={movie.poster}
-                    alt={movie.title}
-                  />
+                  <Link to={{
+                    pathname: `/details/${movie.id}`,
+                  }}>
+                    <img src={movie.poster}
+                      alt={movie.title}
+                    />
+                  </Link>
                 </div>
               </li>
             );
