@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Home from '../Home/Home';
+
 class App extends Component {
-  // Renders the entire app on the DOM
   render() {
     return (
-      <div className="App">
-        <p>Empty Page</p>
-      </div>
+      <Router>
+        <Header />
+        <main className="App-component">
+          <Route path="/" exact component={Home} />
+        </main>
+        <Footer />
+      </Router>
     );
   }
 }
