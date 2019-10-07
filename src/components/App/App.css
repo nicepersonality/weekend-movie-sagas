@@ -1,24 +1,108 @@
-.App {
-  text-align: center;
+
+/* LAYOUT */
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  flex-grow: 0;
+}
+main {
+  flex-grow: 1;
+}
+footer {
+  flex-grow: 0;
 }
 
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+/* Layout: common margins & sizing */
+header, main, footer {
+  margin: 0;
+  padding: 1rem;
+}
+h1, h2, h3, h4, p, ul {
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.App-title {
-  font-size: 1.5em;
+/* Layout: Movie List */
+.Home-list {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-auto-rows: minmax(10rem, auto);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.Home-list .moviePreview {
+  display: flex;
+  flex-direction: column;
+}
+.Home-list .movieTitle {
+  flex-grow: 1;
+}
+.Home-list .moviePoster {
+  flex-grow: 0;
 }
 
-.App-intro {
-  font-size: large;
+/* Layout: Movie Details */
+.MovieDetails-display {
+  display: grid;
+  width: 100%;
+  grid-gap: 2rem;
+  grid-template:
+    "title title" auto
+    "image descr" auto
+    "image genre" auto
+    / 12rem auto;
+}
+.MovieDetails-display .movieTitle {
+  grid-area: title;
+}
+.MovieDetails-display .moviePoster {
+  grid-area: image;
+}
+.MovieDetails-display .movieDescription {
+  grid-area: descr;
+}
+.MovieDetails-display .movieGenres {
+  grid-area: genre;
+}
+.MovieDetails-display .movieGenres ul {
+  list-style: none;
+}
+.MovieDetails-display .movieGenre {
+  display: inline;
+}
+.MovieDetails-display .movieGenre + .movieGenre {
+  margin-left: 2rem;
+}
+.movieDetails-controls button {
+  font-size: 1rem;
+  margin: 1rem 1rem 1rem 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Layout: Edit Details */
+.MovieDetails-display .movieTitle input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.25rem;
+}
+.MovieDetails-display .movieDescription textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1rem;
 }

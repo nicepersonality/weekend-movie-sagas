@@ -85,7 +85,7 @@ class EditDetails extends Component {
                   <h4>
                     <label>Edit description:
                       <textarea
-                        defaultValue={movie.description}
+                        defaultValue={movie.description} rows="8" cols="40"
                         // value={this.state.updateMovie.description}
                         onChange={(event) => this.handleChangeFor(event, 'description')} /></label>
                   </h4>
@@ -107,7 +107,7 @@ class EditDetails extends Component {
           })}
           <div className="movieDetails-controls">
             <button onClick={() => { this.props.history.push(`/details/${this.props.match.params.movieId}`) }}>Cancel</button>
-            <button type="submit">Save</button>
+            <button type="submit">Save Changes</button>
           </div>
         </form>
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}

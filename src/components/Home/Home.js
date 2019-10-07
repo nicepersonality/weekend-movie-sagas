@@ -13,7 +13,7 @@ class Home extends Component {
       <div className="Home-component">
         <h2>Now Playing</h2>
         {/* <pre>{JSON.stringify(this.props.storeInstance, null, 2)}</pre> */}
-        <ul>
+        <ul className="Home-list">
           {this.props.storeInstance.movies.map((movie) => {
             return (
               <li className="moviePreview" key={movie.id}>
