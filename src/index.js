@@ -20,13 +20,14 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
     yield takeEvery('FETCH_DETAILS', fetchDetailsSaga);
     yield takeEvery('FETCH_GENRES', fetchGenresSaga);
+    yield takeEvery('UPDATE_MOVIE', updateMovieSaga);
 }
 
 // Retrieve the list of movies from the database
 function* fetchMoviesSaga() {
     try {
         const response = yield axios.get('/api/movie');
-        console.log('THIS IS FROM GET', response.data);
+        // console.log('fetchMoviesSaga', response.data);
         yield put({ type: 'SET_MOVIES', payload: response.data });
     } catch (error) {
         console.log('Error while fetching movies', error);
@@ -37,7 +38,7 @@ function* fetchDetailsSaga(action) {
     const movieId = action.payload;
     try {
         const response = yield axios.get(`/api/movie/details/${movieId}`);
-        console.log('THIS IS FROM GET', response.data);
+        // console.log('fetchDetailsSaga', response.data);
         yield put({ type: 'SET_DETAILS', payload: response.data });
     } catch (error) {
         console.log('Error while fetching details', error);
@@ -48,13 +49,20 @@ function* fetchGenresSaga(action) {
     const movieId = action.payload;
     try {
         const response = yield axios.get(`/api/movie/genres/${movieId}`);
-        console.log('THIS IS FROM GET', response.data);
+        // console.log('fetchGenresSaga:', response.data);
         yield put({ type: 'SET_GENRES', payload: response.data });
     } catch (error) {
         console.log('Error while fetching genres', error);
     }
 }
 
+function* updateMovieSaga(action) {
+    try {
+        yield axios.put(`/api/movie/update`, action.payload);
+    } catch (error) {
+        console.log('Error while updating movie', error);
+    }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
