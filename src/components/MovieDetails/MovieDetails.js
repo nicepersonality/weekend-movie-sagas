@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 
 class MovieDetails extends Component {
+
   componentDidMount() {
     const { movieId } = this.props.match.params;
     this.props.dispatch({ type: 'FETCH_MOVIES' });
@@ -22,7 +23,7 @@ class MovieDetails extends Component {
         {this.props.storeInstance.details.map((movie) => {
           return (
             <div className="MovieDetails-display" key={movie.id}>
-              <h2>{movie.title}</h2>
+              <h2 className="movieTitle">{movie.title}</h2>
               <div className="moviePoster">
                 <img src={movie.poster}
                   alt={movie.title}

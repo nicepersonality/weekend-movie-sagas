@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
 import MovieDetails from '../MovieDetails/MovieDetails';
+import EditDetails from '../EditDetails/EditDetails';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
         <main className="App-component">
           <Route path="/" exact component={Home} />
           <Route path='/details/:movieId' component={MovieDetails} />
+          <Route path='/edit/:movieId' component={EditDetails} />
         </main>
         <Footer />
       </Router>
